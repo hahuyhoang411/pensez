@@ -50,6 +50,7 @@ def check_reflection_pattern(response: str) -> dict[str, int]:
         "verify",
         "actually",
         "let me think",
+        "but"
     ]
     
     reflection_base_words.sort(key=len, reverse=True)
@@ -178,9 +179,9 @@ training_args = GRPOConfig(
     logging_steps = 1,
     bf16 = is_bfloat16_supported(),
     fp16 = not is_bfloat16_supported(),
-    per_device_train_batch_size = 16,
+    per_device_train_batch_size = 8,
     gradient_accumulation_steps = 4, # Increase to 4 for smoother training
-    num_generations = 16, # Decrease if out of memory
+    num_generations = 8, # Decrease if out of memory
     max_prompt_length = 2048,
     max_completion_length = 14336,
     num_train_epochs = 5, # Set to 1 for a full training run
