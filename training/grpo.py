@@ -9,7 +9,7 @@ import torch
 
 from datasets import load_dataset
 max_seq_length = 16384 # Can increase for longer reasoning traces
-lora_rank = 32 # Larger rank = smarter, but slower
+lora_rank = 16 # Larger rank = smarter, but slower
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = "HoangHa/Pensez-v0.1-e5", #
@@ -178,7 +178,7 @@ training_args = GRPOConfig(
     logging_steps = 1,
     bf16 = is_bfloat16_supported(),
     fp16 = not is_bfloat16_supported(),
-    per_device_train_batch_size = 8,
+    per_device_train_batch_size = 16,
     gradient_accumulation_steps = 4, # Increase to 4 for smoother training
     num_generations = 16, # Decrease if out of memory
     max_prompt_length = 2048,
